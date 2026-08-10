@@ -1,0 +1,350 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-source-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--font-sora), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, monospace;
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-scan: var(--scan);
+  --color-scan-soft: var(--scan-soft);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-line: var(--line);
+  --color-ink: var(--ink);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+}
+
+/*
+ * MITALON demo — Formlabs düzeni, bize özel kimlik:
+ * lacivert (#0F172A) zemin vurguları + mavi (#0369A1) CTA, Lexend başlık + Source Sans 3 gövde.
+ */
+:root {
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.14 0.02 260);
+  --surface: oklch(0.982 0.004 250);
+  --surface-2: oklch(0.945 0.006 250);
+  --line: oklch(0.906 0.008 250);
+  --ink: oklch(0.21 0.035 262);
+  --card: oklch(1 0 0);
+  --card-foreground: var(--foreground);
+  --popover: oklch(1 0 0);
+  --popover-foreground: var(--foreground);
+  --primary: oklch(0.21 0.035 262);
+  --primary-foreground: oklch(0.99 0 0);
+  --secondary: var(--surface);
+  --secondary-foreground: var(--foreground);
+  --muted: var(--surface-2);
+  --muted-foreground: oklch(0.47 0.02 258);
+  --accent: var(--surface);
+  --accent-foreground: var(--foreground);
+  --destructive: oklch(0.55 0.2 25);
+  --border: var(--line);
+  --input: var(--line);
+  --ring: oklch(0.5 0.12 240);
+  --scan: oklch(0.5 0.12 240);
+  --scan-soft: oklch(0.5 0.12 240 / 10%);
+  --radius: 0.5rem;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-sora), ui-sans-serif, system-ui, sans-serif;
+  letter-spacing: -0.022em;
+}
+
+::selection {
+  background: var(--scan);
+  color: var(--primary-foreground);
+}
+
+/* ——— Sinematik scroll girişi ———
+   Fazlar ScrollIntro bileşeninden CSS değişkenleriyle sürülür:
+   --p (ham ilerleme) · --open (perde) · --h1o (ilk başlık) · --c2 (ikinci içerik) · --end (teslim) */
+.intro-stage {
+  --p: 0;
+  --open: 0;
+  --h1o: 1;
+  --c2: 0;
+  --end: 0;
+  transform: scale(calc(1 - var(--end) * 0.045)) translateY(calc(var(--end) * -2vh));
+  border-radius: calc(var(--end) * 28px);
+  will-change: transform;
+}
+
+/* Görsel penceresi: ortadaki küçük çerçeveden tam ekrana açılır */
+.intro-media {
+  clip-path: inset(
+    calc((1 - var(--open)) * 30%)
+    calc((1 - var(--open)) * 34%)
+    calc((1 - var(--open)) * 26%)
+    calc((1 - var(--open)) * 34%)
+    round calc((1 - var(--open)) * 18px)
+  );
+  will-change: clip-path;
+}
+
+.intro-media-img {
+  transform: scale(calc(1.22 - var(--open) * 0.22));
+  will-change: transform;
+}
+
+/* Tarama çizgisi perde açılırken süpürür, teslim fazında söner */
+.intro-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, oklch(0.72 0.12 235), transparent);
+  box-shadow: 0 0 28px 6px oklch(0.72 0.12 235 / 25%);
+  top: calc(10% + var(--open) * 80%);
+  opacity: calc(min(var(--open) * 3, 1) * (1 - var(--end)));
+}
+
+/* İlk başlık: perde açılırken yukarı süzülüp çıkar */
+.intro-title {
+  opacity: var(--h1o);
+  transform: translateY(calc((1 - var(--h1o)) * -46px));
+  pointer-events: none;
+}
+
+/* İkinci içerik: alttan gelir, teslim fazında zeminle birlikte söner */
+.intro-cta {
+  opacity: calc(var(--c2) * (1 - var(--end, 0)));
+  transform: translateY(calc((1 - var(--c2)) * 34px));
+  pointer-events: none;
+}
+
+/* Teslim fazında sönen katmanlar */
+.intro-grid {
+  opacity: calc(0.3 * (1 - var(--end, 0)));
+}
+
+.intro-bar {
+  opacity: calc(1 - var(--end, 0));
+}
+
+.intro-stage:not(.cta-on) .intro-cta {
+  visibility: hidden;
+}
+
+.intro-progress {
+  transform: scaleX(var(--p));
+  transform-origin: left;
+}
+
+/* ——— Yükleme perdesi: beyaz katman logoyla açılır, lacivert katman peşinden süzülür ——— */
+.preload-curtain {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: grid;
+  place-items: center;
+  background: #ffffff;
+  animation: curtain-lift 0.95s cubic-bezier(0.76, 0, 0.24, 1) 1.15s forwards;
+}
+
+.preload-curtain-2 {
+  position: fixed;
+  inset: 0;
+  z-index: 59;
+  background: oklch(0.21 0.035 262);
+  animation: curtain-lift 0.95s cubic-bezier(0.76, 0, 0.24, 1) 1.32s forwards;
+}
+
+@keyframes curtain-lift {
+  to {
+    transform: translateY(-101%);
+  }
+}
+
+.preload-logo {
+  opacity: 0;
+  animation: preload-logo-in 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) 0.15s both;
+}
+
+@keyframes preload-logo-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Yükleme anında kelimelerin blur'dan gelişi (scroll gerektirmez) */
+.intro-word-load {
+  opacity: 0;
+  animation: intro-word-in 0.75s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  animation-delay: var(--d, 0ms);
+}
+
+@keyframes intro-word-in {
+  from {
+    opacity: 0;
+    transform: translateY(26px);
+    filter: blur(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+}
+
+/* Azaltılmış hareket: statik tek ekran */
+.intro-static {
+  height: 100vh !important;
+}
+
+/* Kaydırma ile görünme */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Kelime kelime sahnelenen başlıklar */
+.wreveal .wreveal-word {
+  opacity: 0;
+}
+
+.wreveal.is-visible .wreveal-word {
+  animation: intro-word-in 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  animation-delay: var(--d, 0ms);
+}
+
+/* Giriş sahnesi aktifken menü tamamen gizli; devirde yukarıdan süzülür */
+.site-header {
+  transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.45s ease;
+}
+
+body.intro-active .site-header {
+  transform: translateY(-100%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Giriş sahnesinde chatbot düğmesi de gizli — sahne bölünmesin */
+.chatbot-fab {
+  transition: opacity 0.4s ease, transform 0.2s ease;
+}
+
+/* FAB nabız halkası */
+.fab-pulse {
+  animation: fab-pulse 2.6s ease-out infinite;
+}
+
+@keyframes fab-pulse {
+  0% { transform: scale(1); opacity: 0.7; }
+  70%, 100% { transform: scale(1.45); opacity: 0; }
+}
+
+/* Teklif çekmecesi: sağdan süzülerek girer, fon yumuşakça kararır */
+.drawer-backdrop {
+  animation: backdrop-in 0.3s ease both;
+}
+
+@keyframes backdrop-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.drawer-panel {
+  animation: drawer-in 0.42s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes drawer-in {
+  from { transform: translateX(100%); }
+  to { transform: none; }
+}
+
+/* Sohbet paneli: sağ alttan yaylanarak açılır */
+.chat-panel {
+  transform-origin: bottom right;
+  animation: chat-pop 0.38s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+@keyframes chat-pop {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Mia avatarı: göz kırpma + hafif salınım */
+.avatar-head {
+  animation: avatar-bob 5.2s ease-in-out infinite;
+}
+
+@keyframes avatar-bob {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  30% { transform: translateY(-0.5px) rotate(-2deg); }
+  65% { transform: translateY(0.5px) rotate(2deg); }
+}
+
+.avatar-eye {
+  transform-origin: 50% 50%;
+  transform-box: fill-box;
+  animation: avatar-blink 4.4s infinite;
+}
+
+@keyframes avatar-blink {
+  0%, 91%, 100% { transform: scaleY(1); }
+  94%, 96% { transform: scaleY(0.08); }
+}
+
+body.intro-active .chatbot-fab {
+  opacity: 0;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+}
