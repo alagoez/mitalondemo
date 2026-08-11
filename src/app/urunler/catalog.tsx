@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { Search } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -22,12 +22,28 @@ const CATEGORY_FILTERS: { value: Category | "hepsi"; label: string }[] = [
   { value: "yedek", label: CATEGORY_LABELS.yedek },
 ];
 
+const VALID_CATEGORIES = new Set<string>([
+  "tarayici",
+  "yazici",
+  "kesici",
+  "yazilim",
+  "seramik",
+  "yedek",
+]);
+
 export function Catalog() {
   const params = useSearchParams();
-  const initial = (params.get("kategori") as Category | null) ?? "hepsi";
-  const [category, setCategory] = useState<Category | "hepsi">(initial);
+  const raw = params.get("kategori");
+  const paramCategory: Category | "hepsi" =
+    raw && VALID_CATEGORIES.has(raw) ? (raw as Category) : "hepsi";
+  const [category, setCategory] = useState<Category | "hepsi">(paramCategory);
   const [brand, setBrand] = useState<string | "hepsi">("hepsi");
   const [query, setQuery] = useState("");
+
+  // Menüden gelen kategori linkleri sayfa açıkken de filtreyi değiştirsin
+  useEffect(() => {
+    setCategory(paramCategory);
+  }, [paramCategory]);
 
   const filtered = useMemo(() => {
     return products.filter((p) => {
