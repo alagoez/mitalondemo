@@ -113,8 +113,8 @@ export default function AboutPage() {
           <Reveal>
             <div className="relative aspect-[4/3] overflow-hidden rounded-xl border border-line">
               <Image
-                src="/images/seramik-uretim.jpg"
-                alt="Mitalon üretim süreci"
+                src="/images/hakkimizda-tarama.jpg"
+                alt="Motor bloğu üzerinde el tipi 3D lazer tarama"
                 fill
                 sizes="(max-width: 768px) 100vw, 560px"
                 className="object-cover"
