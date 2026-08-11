@@ -12,7 +12,7 @@ import { WordReveal } from "@/components/word-reveal";
 import { PointCloudIntro } from "@/components/point-cloud-intro";
 import { ApplicationsTabs } from "@/components/applications-tabs";
 import { StatsBand } from "@/components/stats-band";
-import { CATEGORY_LABELS, products } from "@/lib/products";
+import { products } from "@/lib/products";
 
 const GRID_SLUGS = [
   "freescan-ue-pro-2",
