@@ -12,6 +12,8 @@ export interface Product {
   brand: string;
   category: Category;
   image: string;
+  /** true: koyu grafit zeminli premium fotoğraf (kartta kenardan kenara) */
+  photo?: boolean;
   blurb: string;
   tags: string[];
   specs: Record<string, string>;
@@ -278,6 +280,7 @@ export const products: Product[] = [
     brand: "Mitalon",
     category: "kesici",
     image: "/images/cnmg-1204.jpg",
+    photo: true,
     blurb: "Tornalama operasyonları için talaş kırıcılı, kaplamalı karbür kesici uç.",
     tags: ["Tornalama", "Karbür"],
     specs: { Tip: "CNMG 1204", Malzeme: "Kaplamalı karbür", Uygulama: "Çelik ve döküm tornalama" },
@@ -288,6 +291,7 @@ export const products: Product[] = [
     brand: "Mitalon",
     category: "kesici",
     image: "/images/sngx-120716.jpg",
+    photo: true,
     blurb: "Yüksek hız işleme için seramik esaslı frezeleme ucu.",
     tags: ["Frezeleme", "Seramik"],
     specs: { Tip: "SNGX 120716", Malzeme: "Teknik seramik", Uygulama: "Yüksek hızlı işleme" },
@@ -298,6 +302,7 @@ export const products: Product[] = [
     brand: "Mitalon",
     category: "kesici",
     image: "/images/wngx-080416.jpg",
+    photo: true,
     blurb: "Dayanıklı kesme kenarıyla zorlu malzemelerde uzun takım ömrü.",
     tags: ["Frezeleme"],
     specs: { Tip: "WNGX 080416-E", Uygulama: "Zorlu alaşımlar" },
@@ -308,6 +313,7 @@ export const products: Product[] = [
     brand: "Mitalon",
     category: "kesici",
     image: "/images/boru-capak.jpg",
+    photo: true,
     blurb: "Boru iç-dış çapaklarını tek operasyonda temizleyen özel takım.",
     tags: ["Özel takım", "Pirinç"],
     specs: { Malzeme: "Pirinç gövde", Uygulama: "Boru işleme hatları" },
@@ -318,6 +324,7 @@ export const products: Product[] = [
     brand: "Mitalon",
     category: "kesici",
     image: "/images/pah-kirma.jpg",
+    photo: true,
     blurb: "Hassas kenar kırma ve pah operasyonları için özel üretim takım.",
     tags: ["Özel takım"],
     specs: { Uygulama: "Kenar pahı, hazırlık operasyonları" },
@@ -330,6 +337,7 @@ export const products: Product[] = [
     brand: "Oqton",
     category: "yazilim",
     image: "/images/yazilim-cad.jpg",
+    photo: true,
     blurb:
       "Tarama verisini parametrik CAD modeline dönüştüren tersine mühendislik yazılımı.",
     tags: ["Tersine mühendislik", "CAD"],
@@ -345,6 +353,7 @@ export const products: Product[] = [
     brand: "Oqton",
     category: "yazilim",
     image: "/images/yazilim-olcum.jpg",
+    photo: true,
     blurb:
       "Tarama-CAD karşılaştırmalı, renk haritalı boyutsal kalite kontrol yazılımı.",
     tags: ["Kalite kontrol", "Metroloji"],
@@ -360,6 +369,7 @@ export const products: Product[] = [
     brand: "Oqton",
     category: "yazilim",
     image: "/images/yazilim-mesh.jpg",
+    photo: true,
     blurb:
       "Tarama sonrası veri temizleme ve mesh düzenleme için giriş seviyesi araç seti.",
     tags: ["Mesh düzenleme"],
@@ -374,6 +384,7 @@ export const products: Product[] = [
     brand: "Siemens",
     category: "yazilim",
     image: "/images/yazilim-solid.jpg",
+    photo: true,
     blurb:
       "Tarama verisiyle senkron çalışan, Shining 3D cihazlarıyla paket sunulan CAD çözümü.",
     tags: ["CAD", "Senkron modelleme"],
@@ -388,6 +399,7 @@ export const products: Product[] = [
     brand: "Shining 3D",
     category: "yazilim",
     image: "/images/yazilim-surface.jpg",
+    photo: true,
     blurb:
       "Tarama verisinden hızlı yüzey ve katı model üretimi için pratik dönüşüm aracı.",
     tags: ["Mesh → CAD"],
@@ -404,6 +416,7 @@ export const products: Product[] = [
     brand: "Mitalon",
     category: "seramik",
     image: "/images/seramik-parcalar.jpg",
+    photo: true,
     blurb:
       "İleri teknoloji kalıplama prosesiyle üretilen, aşınmaya ve yüksek sıcaklığa dayanıklı endüstriyel seramik parçalar.",
     tags: ["Alümina", "Aşınma direnci"],
@@ -421,6 +434,7 @@ export const products: Product[] = [
     brand: "Mitalon",
     category: "yedek",
     image: "/images/toyota-airjet-pro.jpg",
+    photo: true,
     blurb:
       "Airjet dokuma makinaları için ölçüsel birebir, yerli üretim yedek parçalar.",
     tags: ["Tekstil", "Dokuma"],
@@ -435,6 +449,7 @@ export const products: Product[] = [
     brand: "Mitalon",
     category: "yedek",
     image: "/images/tekstil-10-pro.jpg",
+    photo: true,
     blurb:
       "Tekstil makinaları için hassas işlenmiş, uzun ömürlü yedek parça üretimi.",
     tags: ["Tekstil"],
@@ -449,6 +464,7 @@ export const products: Product[] = [
     brand: "Mitalon",
     category: "yedek",
     image: "/images/tekstil-12-pro.jpg",
+    photo: true,
     blurb:
       "Numuneden veya teknik resimden, siparişe özel hassas parça üretimi.",
     tags: ["Özel üretim"],

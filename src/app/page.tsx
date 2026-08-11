@@ -4,14 +4,8 @@ import {
   ArrowRight,
   Award,
   Factory,
-  Gem,
-  Headset,
-  Lightbulb,
-  Network,
   Newspaper,
-  Rocket,
   ShieldCheck,
-  Target,
 } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 import { WordReveal } from "@/components/word-reveal";
@@ -85,15 +79,6 @@ const IDENTITY = [
   },
 ];
 
-const VALUES = [
-  { icon: Gem, label: "Değer Katan" },
-  { icon: Target, label: "Çözüm ve Sonuç Odaklı" },
-  { icon: Headset, label: "Profesyonel Destek" },
-  { icon: Lightbulb, label: "Uzman Görüşü" },
-  { icon: Network, label: "Güçlü Network Ağı" },
-  { icon: Rocket, label: "Yenilikçi Yaklaşım" },
-];
-
 const SECTOR_CASES = [
   {
     sector: "Otomotiv Yan Sanayi",
@@ -128,16 +113,17 @@ export default function HomePage() {
       {/* ——— 1. AÇILIŞ: perde + nokta bulutu sahnesi ——— */}
       <PointCloudIntro />
 
-      {/* ——— 1b. KURUMSAL KİMLİK: vizyon · misyon · motto ——— */}
-      <section className="border-b border-line">
-        <div className="mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-3">
+      {/* ——— 1b. KURUMSAL KİMLİK: vizyon · misyon · motto ———
+          Koyu zemin giriş sahnesiyle aynı renktir; intro buraya dikişsiz bağlanır. */}
+      <section className="bg-[#07090f] text-white">
+        <div className="mx-auto grid max-w-7xl gap-10 px-4 pb-16 pt-6 sm:px-6 md:grid-cols-3">
           {IDENTITY.map((item, i) => (
             <Reveal key={item.label} delay={i * 90}>
-              <div className="md:border-l md:border-line md:pl-6 md:first:border-l-0 md:first:pl-0">
-                <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-scan">
+              <div className="md:border-l md:border-white/10 md:pl-6 md:first:border-l-0 md:first:pl-0">
+                <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-sky-300/90">
                   {item.label}
                 </p>
-                <p className="mt-3 text-[14.5px] leading-relaxed text-muted-foreground">
+                <p className="mt-3 text-[14.5px] leading-relaxed text-white/60">
                   {item.text}
                 </p>
               </div>
@@ -285,31 +271,6 @@ export default function HomePage() {
               </Link>
             ))}
           </Reveal>
-        </div>
-      </section>
-
-      {/* ——— 5b. MİTALON FARKI ——— */}
-      <section className="border-b border-white/10 bg-ink text-white">
-        <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6">
-          <Reveal>
-            <h2 className="text-2xl font-semibold tracking-tight">Mitalon Farkı</h2>
-            <p className="mt-2 max-w-lg text-[14.5px] text-white/60">
-              Müşterilerimizin beklentilerinin ilerisine geçerek her koşulda
-              çözüm üretmek için hazırız.
-            </p>
-          </Reveal>
-          <div className="mt-8 grid grid-cols-2 gap-x-6 gap-y-5 sm:grid-cols-3 lg:grid-cols-6">
-            {VALUES.map((v, i) => (
-              <Reveal key={v.label} delay={i * 60}>
-                <div className="flex items-center gap-3 lg:flex-col lg:items-start lg:gap-3">
-                  <span className="grid size-10 shrink-0 place-items-center rounded-md bg-white/10 text-sky-300">
-                    <v.icon className="size-5" aria-hidden />
-                  </span>
-                  <p className="text-[13px] font-semibold leading-snug">{v.label}</p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
         </div>
       </section>
 

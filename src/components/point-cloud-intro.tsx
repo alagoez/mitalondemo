@@ -233,19 +233,16 @@ export function PointCloudIntro({ lang = "tr" }: { lang?: IntroLang }) {
       const fadeOut = clamp01((p - 0.86) / 0.14); // sahne çıkışı (geç ve kısa)
 
       // CSS katmanlarına faz bildir
-      const end = clamp01((p - 0.9) / 0.1); // teslim: yalnızca son anda, kısacık beyazlar
+      const end = clamp01((p - 0.9) / 0.1); // teslim: sahne koyu kalır, hafifçe küçülüp geri çekilir
       stage.style.setProperty("--p", p.toFixed(4));
       stage.style.setProperty("--h1o", (1 - clamp01((p - 0.3) / 0.2)).toFixed(4));
       stage.style.setProperty("--c2", clamp01((p - 0.52) / 0.24).toFixed(4));
       stage.style.setProperty("--end", end.toFixed(4));
       stage.classList.toggle("cta-on", p > 0.54);
 
-      // Devir anı: sahne beyaza akarken menü yukarıdan süzülerek gelir
+      // Devir anı: menü yukarıdan süzülerek gelir; zemin koyu kaldığı için
+      // sahne alttaki koyu kimlik şeridine dikişsiz bağlanır (beyaz parlama yok)
       document.body.classList.toggle("intro-active", p < 0.86);
-
-      // Pürüzsüz teslim: zemin koyu laciverttten ana sayfanın beyazına akar
-      const mix = (a: number, b: number) => Math.round(a + (b - a) * end);
-      stage.style.backgroundColor = `rgb(${mix(7, 255)},${mix(9, 255)},${mix(15, 255)})`;
 
       // Sonar nabzı: merkezden dışa yayılan yumuşak parlaklık halkası
       const cycle = (t % 4.5) / 4.5;

@@ -48,6 +48,21 @@ const GRID: { slug: string; tag: string; blurb: string }[] = [
 
 const NEW_SLUGS = new Set(["freescan-trak-pro-2", "freescan-trak-nova"]);
 
+const IDENTITY = [
+  {
+    label: "Our Vision",
+    text: "To be an innovative, preferred and recommended company that exceeds customer expectations.",
+  },
+  {
+    label: "Our Mission",
+    text: "To work customer-focused, follow industry developments on a global scale and bring technology together through a reliable partnership.",
+  },
+  {
+    label: "Our Motto",
+    text: "Producing solutions under any circumstances — you imagine it, we make it real.",
+  },
+];
+
 const NEWS = [
   {
     title: "FreeScan Trak Nova arrives in Türkiye: marker-free tracked scanning",
@@ -118,6 +133,24 @@ export default function EnglishHomePage() {
   return (
     <>
       <PointCloudIntro lang="en" />
+
+      {/* Corporate identity — dark bridge, matches the intro scene background */}
+      <section className="bg-[#07090f] text-white">
+        <div className="mx-auto grid max-w-7xl gap-10 px-4 pb-16 pt-6 sm:px-6 md:grid-cols-3">
+          {IDENTITY.map((item, i) => (
+            <Reveal key={item.label} delay={i * 90}>
+              <div className="md:border-l md:border-white/10 md:pl-6 md:first:border-l-0 md:first:pl-0">
+                <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-sky-300/90">
+                  {item.label}
+                </p>
+                <p className="mt-3 text-[14.5px] leading-relaxed text-white/60">
+                  {item.text}
+                </p>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </section>
 
       {/* Headline + product grid */}
       <section id="urun-gruplari" className="bg-background">

@@ -6,7 +6,6 @@ import {
   MapPin,
   MessageCircle,
   Phone,
-  Wrench,
 } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 import { ContactForm } from "./contact-form";
@@ -24,27 +23,6 @@ const CHANNELS = [
     label: "Adres",
     value: "Alaaddinbey Mah. Pazar Cad. Pega 2 Plaza No: 5/A Nilüfer / Bursa",
     href: undefined,
-  },
-];
-
-const DEPARTMENTS = [
-  {
-    icon: Headset,
-    title: "Satış",
-    text: "Ürün seçimi, demo ve teklif talepleri",
-    note: "Aynı iş günü dönüş",
-  },
-  {
-    icon: Wrench,
-    title: "Teknik Servis",
-    text: "Kurulum, eğitim, bakım ve arıza kayıtları",
-    note: "Yerinde servis desteği",
-  },
-  {
-    icon: Clock,
-    title: "Çalışma Saatleri",
-    text: "Pazartesi – Cuma · 08:30 – 18:00",
-    note: "AI asistan 7/24 yanıtlar",
   },
 ];
 
@@ -70,112 +48,112 @@ const FAQ = [
 export default function ContactPage() {
   return (
     <>
-      {/* Koyu hero bandı */}
-      <section className="bg-ink text-white">
-        <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6">
-          <p className="font-mono text-xs uppercase tracking-[0.3em] text-sky-300/90">
-            İletişim
-          </p>
-          <h1 className="mt-3 max-w-xl text-4xl font-semibold leading-tight sm:text-5xl text-balance">
-            Size nasıl yardımcı olabiliriz?
-          </h1>
-          <p className="mt-4 max-w-lg text-lg leading-relaxed text-white/70">
-            Ürün seçimi, demo talebi veya teklif için bize ulaşın — aynı iş
-            günü dönüş yapıyoruz.
-          </p>
-        </div>
-      </section>
-
-      {/* Kanallar + form */}
-      <section>
-        <div className="mx-auto grid max-w-7xl gap-12 px-4 py-16 sm:px-6 md:grid-cols-[1fr_1.2fr]">
+      {/* ——— Tek parça iletişim kartı: solda koyu bilgi paneli, sağda form ——— */}
+      <section className="border-b border-line bg-surface">
+        <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
           <Reveal>
-            <ul className="space-y-4">
-              {CHANNELS.map((c) => (
-                <li key={c.label} className="flex items-center gap-4">
-                  <span className="grid size-11 shrink-0 place-items-center rounded-md bg-scan-soft text-scan">
-                    <c.icon className="size-5" aria-hidden />
-                  </span>
-                  <div>
-                    <p className="text-[12px] font-semibold uppercase tracking-wider text-muted-foreground">
-                      {c.label}
-                    </p>
-                    {c.href ? (
-                      <a href={c.href} className="text-[15px] font-medium hover:text-scan">
-                        {c.value}
+            <div className="overflow-hidden rounded-[24px] bg-white shadow-[0_18px_52px_-22px_oklch(0.25_0.03_260/0.4)] ring-1 ring-line/70">
+              <div className="grid md:grid-cols-[0.95fr_1.05fr]">
+                {/* Sol panel — koyu */}
+                <div className="relative flex flex-col overflow-hidden bg-ink p-7 text-white sm:p-9">
+                  {/* Yumuşak mavi parlama */}
+                  <span
+                    aria-hidden
+                    className="pointer-events-none absolute -left-28 -top-28 size-80 rounded-full bg-sky-400/10 blur-3xl"
+                  />
+
+                  <p className="font-mono text-xs uppercase tracking-[0.3em] text-sky-300/90">
+                    İletişim
+                  </p>
+                  <h1 className="mt-3 text-3xl font-semibold leading-tight text-balance sm:text-4xl">
+                    Size nasıl yardımcı olabiliriz?
+                  </h1>
+                  <p className="mt-3 max-w-sm text-[15px] leading-relaxed text-white/60">
+                    Ürün seçimi, demo talebi veya teklif için yazın — aynı iş
+                    günü dönüş yapıyoruz.
+                  </p>
+
+                  <ul className="mt-9 space-y-5">
+                    {CHANNELS.map((c) => (
+                      <li key={c.label} className="flex items-start gap-4">
+                        <span className="grid size-10 shrink-0 place-items-center rounded-full bg-white/10 text-sky-300">
+                          <c.icon className="size-[18px]" aria-hidden />
+                        </span>
+                        <div className="min-w-0">
+                          <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/40">
+                            {c.label}
+                          </p>
+                          {c.href ? (
+                            <a
+                              href={c.href}
+                              className="mt-0.5 block text-[15px] font-medium transition-colors hover:text-sky-300"
+                            >
+                              {c.value}
+                            </a>
+                          ) : (
+                            <p className="mt-0.5 text-[15px] font-medium leading-snug">
+                              {c.value}
+                            </p>
+                          )}
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <a
+                    href="https://wa.me/905352492356"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-9 flex cursor-pointer items-center justify-center gap-2.5 rounded-full bg-[#25D366] px-5 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90"
+                  >
+                    <MessageCircle className="size-5" aria-hidden />
+                    WhatsApp&apos;tan Yazın
+                  </a>
+
+                  <div className="mt-auto pt-9">
+                    <div className="space-y-2.5 border-t border-white/10 pt-6 text-[13px] text-white/55">
+                      <p className="flex items-center gap-2.5">
+                        <Clock className="size-4 shrink-0 text-sky-300/80" aria-hidden />
+                        Pazartesi – Cuma · 08:30 – 18:00 · AI asistan 7/24 yanıtlar
+                      </p>
+                      <p className="flex items-center gap-2.5">
+                        <Headset className="size-4 shrink-0 text-sky-300/80" aria-hidden />
+                        Satış ve teknik serviste aynı iş günü dönüş
+                      </p>
+                    </div>
+                    <div className="mt-6 flex items-center gap-5 text-[13px] font-semibold text-white/70">
+                      <a
+                        href="https://www.linkedin.com"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="cursor-pointer transition-colors hover:text-sky-300"
+                      >
+                        LinkedIn
                       </a>
-                    ) : (
-                      <p className="text-[15px] font-medium">{c.value}</p>
-                    )}
-                  </div>
-                </li>
-              ))}
-            </ul>
-
-            {/* WhatsApp hattı */}
-            <a
-              href="https://wa.me/905352492356"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-7 inline-flex w-full cursor-pointer items-center justify-center gap-2.5 rounded-md bg-[#25D366] px-5 py-3.5 text-sm font-semibold text-white transition-opacity hover:opacity-90"
-            >
-              <MessageCircle className="size-5" aria-hidden />
-              WhatsApp'tan Yazın — Hemen Yanıtlayalım
-            </a>
-
-            {/* Departman kartları */}
-            <div className="mt-7 space-y-3">
-              {DEPARTMENTS.map((d) => (
-                <div
-                  key={d.title}
-                  className="flex items-start gap-4 rounded-lg border border-line bg-surface p-4"
-                >
-                  <span className="grid size-10 shrink-0 place-items-center rounded-md bg-white text-scan">
-                    <d.icon className="size-5" aria-hidden />
-                  </span>
-                  <div>
-                    <p className="text-sm font-semibold">{d.title}</p>
-                    <p className="mt-0.5 text-[13.5px] text-muted-foreground">{d.text}</p>
-                    <p className="mt-1 font-mono text-[10px] uppercase tracking-widest text-scan">
-                      {d.note}
-                    </p>
+                      <a
+                        href="https://www.youtube.com"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="cursor-pointer transition-colors hover:text-sky-300"
+                      >
+                        YouTube
+                      </a>
+                    </div>
                   </div>
                 </div>
-              ))}
-            </div>
 
-            {/* Sosyal */}
-            <div className="mt-7 flex items-center gap-3">
-              <p className="text-[13px] font-semibold text-muted-foreground">
-                Bizi takip edin:
-              </p>
-              <a
-                href="https://www.linkedin.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="cursor-pointer rounded-md border border-line px-4 py-2 text-[13px] font-semibold transition-colors hover:border-scan hover:text-scan"
-              >
-                LinkedIn
-              </a>
-              <a
-                href="https://www.youtube.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="cursor-pointer rounded-md border border-line px-4 py-2 text-[13px] font-semibold transition-colors hover:border-scan hover:text-scan"
-              >
-                YouTube
-              </a>
+                {/* Sağ panel — form */}
+                <div className="p-7 sm:p-9">
+                  <ContactForm />
+                </div>
+              </div>
             </div>
-          </Reveal>
-
-          <Reveal delay={100}>
-            <ContactForm />
           </Reveal>
         </div>
       </section>
 
       {/* Harita */}
-      <section className="border-y border-line bg-surface">
+      <section>
         <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6">
           <Reveal>
             <h2 className="text-2xl font-semibold tracking-tight">Bizi ziyaret edin</h2>
@@ -193,7 +171,7 @@ export default function ContactPage() {
       </section>
 
       {/* SSS */}
-      <section>
+      <section className="border-t border-line bg-surface">
         <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6">
           <Reveal>
             <h2 className="text-center text-2xl font-semibold tracking-tight">
